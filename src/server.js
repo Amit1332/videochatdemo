@@ -13,7 +13,7 @@ import { ExpressPeerServer } from 'peer';
 const app = express();
 const httpServer = http.createServer(app);
 
-const CLIENT_ORIGIN = process.env.CLIENT_ORIGIN?.split(',').map(s => s.trim()) || ['http://localhost:5173','http://localhost:3000'];
+const CLIENT_ORIGIN = process.env.CLIENT_ORIGIN?.split(',').map(s => s.trim()) || ['http://localhost:5173','http://localhost:3000','https://videochatdemo-ui.vercel.app'];
 
 app.use(cors({   cors: {
     origin: "*", // allow all
