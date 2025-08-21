@@ -15,7 +15,10 @@ const httpServer = http.createServer(app);
 
 const CLIENT_ORIGIN = process.env.CLIENT_ORIGIN?.split(',').map(s => s.trim()) || ['http://localhost:5173','http://localhost:3000'];
 
-app.use(cors({ origin: CLIENT_ORIGIN, credentials: true }));
+app.use(cors({   cors: {
+    origin: "*", // allow all
+    methods: ["GET", "POST"]
+  }, credentials: true }));
 app.use(express.json());
 
 app.get('/health', (req, res) => res.json({ status: 'ok' }));
@@ -59,7 +62,7 @@ const PORT = process.env.PORT || 5000;
 (async () => {
 try {
 await connectDatabase(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/videochat');
-httpServer.listen(PORT, () => {
+httpServer.listen(PORT, '192.168.1.5', () => {
 console.log(`Server listening on http://localhost:${PORT}`);
 console.log(`PeerJS server on ${PEER_PATH}`);
 });
